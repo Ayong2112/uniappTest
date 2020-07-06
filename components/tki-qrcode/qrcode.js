@@ -1160,7 +1160,7 @@ let QRCode = {};
                             },
                             complete: function () {
                                 if (options.showLoading){
-                                    // uni.hideLoading();
+                                    uni.hideLoading();
                                 }
                             },
                         }, options.context);

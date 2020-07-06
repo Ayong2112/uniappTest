@@ -1,20 +1,20 @@
 <template xlang="wxml" minapp="mpvue">
 	<view class="tki-qrcode">
 		<!-- #ifndef MP-ALIPAY -->
-		<canvas class="tki-qrcode-canvas" :canvas-id="cid" :style="{width:cpSize+'px',height:cpSize+'px'}" />
+		<canvas class="tki-qrcode-canvas" :canvas-id="cid" :style="{ width: cpSize + 'px', height: cpSize + 'px' }" />
 		<!-- #endif -->
 		<!-- #ifdef MP-ALIPAY -->
 		<canvas :id="cid" :width="cpSize" :height="cpSize" class="tki-qrcode-canvas" />
 		<!-- #endif -->
-		<image v-show="show" :src="result" :style="{width:cpSize+'px',height:cpSize+'px'}" />
+		<image v-show="show" :src="result" :style="{ width: cpSize + 'px', height: cpSize + 'px' }" />
 	</view>
 </template>
 
 <script>
-import QRCode from "./qrcode.js"
-let qrcode
+import QRCode from './qrcode.js';
+let qrcode;
 export default {
-	name: "tki-qrcode",
+	name: 'tki-qrcode',
 	props: {
 		cid: {
 			type: String,
@@ -79,20 +79,20 @@ export default {
 		loadingText: {
 			type: String,
 			default: '加载通行码'
-		},
+		}
 	},
 	data() {
 		return {
-			result: '',
-		}
+			result: ''
+		};
 	},
 	methods: {
 		_makeCode() {
-			let that = this
+			let that = this;
 			if (!this._empty(this.val)) {
 				qrcode = new QRCode({
 					context: that, // 上下文环境
-					canvasId:that.cid, // canvas-id
+					canvasId: that.cid, // canvas-id
 					usingComponents: that.usingComponents, // 是否是自定义组件
 					showLoading: that.showLoading, // 是否显示loading
 					loadingText: that.loadingText, // loading文字
@@ -103,10 +103,11 @@ export default {
 					pdground: that.pdground, // 定位角点颜色
 					correctLevel: that.lv, // 容错级别
 					image: that.icon, // 二维码图标
-					imageSize: that.iconSize,// 二维码图标大小
-					cbResult: function (res) { // 生成二维码的回调
-						that._result(res)
-					},
+					imageSize: that.iconSize, // 二维码图标大小
+					cbResult: function(res) {
+						// 生成二维码的回调
+						that._result(res);
+					}
 				});
 			} else {
 				uni.showToast({
@@ -117,15 +118,15 @@ export default {
 			}
 		},
 		_clearCode() {
-			this._result('')
-			qrcode.clear()
+			this._result('');
+			qrcode.clear();
 		},
 		_saveCode() {
 			let that = this;
-			if (this.result != "") {
+			if (this.result != '') {
 				uni.saveImageToPhotosAlbum({
 					filePath: that.result,
-					success: function () {
+					success: function() {
 						uni.showToast({
 							title: '二维码保存成功',
 							icon: 'success',
@@ -137,41 +138,41 @@ export default {
 		},
 		_result(res) {
 			this.result = res;
-			this.$emit('result', res)
+			this.$emit('result', res);
 		},
 		_empty(v) {
 			let tp = typeof v,
 				rt = false;
-			if (tp == "number" && String(v) == "") {
-				rt = true
-			} else if (tp == "undefined") {
-				rt = true
-			} else if (tp == "object") {
-				if (JSON.stringify(v) == "{}" || JSON.stringify(v) == "[]" || v == null) rt = true
-			} else if (tp == "string") {
-				if (v == "" || v == "undefined" || v == "null" || v == "{}" || v == "[]") rt = true
-			} else if (tp == "function") {
-				rt = false
+			if (tp == 'number' && String(v) == '') {
+				rt = true;
+			} else if (tp == 'undefined') {
+				rt = true;
+			} else if (tp == 'object') {
+				if (JSON.stringify(v) == '{}' || JSON.stringify(v) == '[]' || v == null) rt = true;
+			} else if (tp == 'string') {
+				if (v == '' || v == 'undefined' || v == 'null' || v == '{}' || v == '[]') rt = true;
+			} else if (tp == 'function') {
+				rt = false;
 			}
-			return rt
+			return rt;
 		}
 	},
 	watch: {
-		size: function (n, o) {
+		size: function(n, o) {
 			if (n != o && !this._empty(n)) {
-				this.cSize = n
+				this.cSize = n;
 				if (!this._empty(this.val)) {
 					setTimeout(() => {
-						this._makeCode()
+						this._makeCode();
 					}, 100);
 				}
 			}
 		},
-		val: function (n, o) {
+		val: function(n, o) {
 			if (this.onval) {
 				if (n != o && !this._empty(n)) {
 					setTimeout(() => {
-						this._makeCode()
+						this._makeCode();
 					}, 0);
 				}
 			}
@@ -179,41 +180,40 @@ export default {
 	},
 	computed: {
 		cpSize() {
-			if(this.unit == "upx"){
-				return uni.upx2px(this.size)
-			}else{
-				return this.size
+			if (this.unit == 'upx') {
+				return uni.upx2px(this.size);
+			} else {
+				return this.size;
 			}
 		}
 	},
-	mounted: function () {
+	mounted: function() {
 		if (this.loadMake) {
 			if (!this._empty(this.val)) {
 				setTimeout(() => {
-					this._makeCode()
+					this._makeCode();
 				}, 0);
 			}
 		}
-	},
-}
+	}
+};
 </script>
-<style lang="scss">
-.tki-qrcode {
-  position: relative;
-  .uni-toast .uni-toast{
-  		top:60%;
-  		width: 5em;
-  		.uni-toast__content{
-  			font-size: 12px;
-  			font-weight: 500;
-  		}
-  	}
+<style lang="scss" scoped>
+/deep/.uni-toast .uni-toast {
+	top: 60%;
+	width: 5em;
+	/deep/.uni-toast__content {
+		font-size: 12px;
+		font-weight: 500;
+	}
+}
+s .tki-qrcode {
+	position: relative;
 }
 .tki-qrcode-canvas {
-  position: fixed;
-  top: -99999upx;
-  left: -99999upx;
-  z-index: -99999;
+	position: fixed;
+	top: -99999upx;
+	left: -99999upx;
+	z-index: -99999;
 }
-
 </style>

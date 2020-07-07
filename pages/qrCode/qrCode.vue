@@ -12,6 +12,13 @@
 		</view>
 		<!-- 中间部分 -->
 		<view class="content">
+	<!-- 		<view class="backgroundImg">
+				<image src="../../static/image/qrcode/sdh.jpg" mode=""></image>
+				<image src="../../static/image/qrcode/sdh.jpg" mode=""></image>
+				<image src="../../static/image/qrcode/sdh.jpg" mode=""></image>
+				<image src="../../static/image/qrcode/sdh.jpg" mode=""></image>
+				<image src="../../static/image/qrcode/sdh.jpg" mode=""></image>
+			</view> -->
 			<view class="contentWrap">
 				<!-- 顶部 -->
 				<view class="content_header">
@@ -24,7 +31,7 @@
 					<view>{{ nowDate.time }}</view>
 				</view>
 				<!-- 二维码 -->
-				<view class="qrimg-i"  @click="refreshCode">
+				<view class="qrimg-i" @click="refreshCode">
 					<tki-qrcode
 						v-if="ifShow"
 						cid="qrcode1"
@@ -45,7 +52,7 @@
 					/>
 				</view>
 				<view class="refresh">点击二维码刷新</view>
-				<view class="fullName">**三</view>
+				<view class="fullName">*飞</view>
 				<!-- <view class="poetry">不经一番彻骨寒，怎得梅花扑鼻香</view> -->
 				<!-- <view class="container">
 					<view class="qrimg">
@@ -65,6 +72,7 @@
 					</view>
 				</view> -->
 			</view>
+			<view class="bottom">数据来源：国家政务服务平台及本省公共管理机构</view>
 		</view>
 	</view>
 </template>
@@ -199,8 +207,8 @@ export default {
 		},
 		// 刷新二维码
 		refreshCode() {
-			this.val = this.randomWord(false,32)
-			this.creatQrcode()
+			this.val = this.randomWord(false, 32);
+			this.creatQrcode();
 		},
 		// ↓ 二维码事件
 		sliderchange(e) {
@@ -253,10 +261,10 @@ export default {
 @import '../../static/iconfont/iconfont.css';
 .qrCodeWrap {
 	.header {
-		height: 68px;
-		line-height: 68px;
-		font-size: 20px;
-		font-weight: 500;
+		height: 48px;
+		line-height: 48px;
+		font-size: 16px;
+		font-weight: 100;
 		.backLeft {
 			margin: 0 10px;
 			.iconzuo {
@@ -267,18 +275,18 @@ export default {
 			float: right;
 			border: 1px solid rgb(223, 223, 223);
 			border-radius: 20px;
-			height: 40px;
-			width: 122px;
-			margin: 14px 5px 0 0;
+			height: 30px;
+			width: 100px;
+			margin: 10px 8px 0 0;
 			.iconfont {
-				font-size: 24px;
-				margin: 0 18px;
-				line-height: 40px;
+				font-size: 22px;
+				margin: 0 13px;
+				line-height: 30px;
 			}
 			.shu {
 				width: 0;
-				margin-top: 8px;
-				height: 24px;
+				margin-top: 4px;
+				height: 20px;
 				border-left: 1px solid rgb(223, 223, 223);
 			}
 		}
@@ -290,22 +298,22 @@ export default {
 		float: left;
 	}
 	.content {
-		height: calc(100vh - 68px);
+		height: calc(100vh - 48px);
 		background-color: rgb(0, 128, 1);
 		overflow: hidden;
 		.contentWrap {
 			width: 86%;
-			height: 450px;
+			height: 460px;
 			background: #ffffff;
-			margin: 10% 7% 0;
+			margin: 14% 7% 0;
 			border-radius: 10px;
 			text-align: center;
 			.content_header > view {
 				float: left;
 			}
 			.content_header {
-				height: 50px;
-				line-height: 50px;
+				height: 60px;
+				line-height: 60px;
 				background-color: rgb(230, 229, 227);
 				border-radius: 10px 10px 0 0;
 				.iconfont {
@@ -320,6 +328,7 @@ export default {
 			.dateTime {
 				font-size: 30px;
 				font-weight: 800;
+				line-height: 34px;
 			}
 			.refresh {
 				color: #838489;
@@ -336,7 +345,28 @@ export default {
 				font-weight: 600;
 			}
 		}
-	}
+		.bottom{
+			width: 100%;
+			position: fixed;
+			bottom: 30px;
+			font-size: 14px;
+			color: #FFFFFF;
+			text-align: center;
+		}
+		// 图片
+		.backgroundImg {
+			position: relative;
+			image {
+				position: absolute;
+				width: 70px;
+				height: 60px;
+			}
+			image:nth-of-type(1){
+				top: 50px;
+				left: 20px;
+			}
+		}
 	
+	}
 }
 </style>

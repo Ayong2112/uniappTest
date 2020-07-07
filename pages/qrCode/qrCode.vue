@@ -304,7 +304,7 @@ export default {
 		.contentWrap {
 			width: 86%;
 			height: 460px;
-			background: #ffffff;
+			background: #ffffff  url(../../static/image/qrcode/qrCodeBg1.png) no-repeat;
 			margin: 14% 7% 0;
 			border-radius: 10px;
 			text-align: center;

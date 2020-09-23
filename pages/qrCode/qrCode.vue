@@ -2,12 +2,12 @@
 	<view class="qrCodeWrap">
 		<!-- 顶部-->
 		<view class="header">
-			<view class="backLeft"><view class="iconfont iconzuo"></view></view>
+			<view class="backLeft" @click="back()"><view class="iconfont iconzuo"></view></view>
 			<view>电子健康码</view>
 			<view class="rightIcon">
-				<view class="iconfont iconmore"></view>
+				<view class="iconfont iconmore" @click="goSetting()"></view>
 				<view class="shu"></view>
-				<view class="iconfont iconyuandian"></view>
+				<view class="iconfont iconyuandian" @click="goHome()"></view>
 			</view>
 		</view>
 		<!-- 中间部分 -->
@@ -72,6 +72,7 @@
 					</view>
 				</view> -->
 			</view>
+			<view class="serchInfo">核酸检测信息查询</view>
 			<view class="bottom">数据来源：国家政务服务平台及本省公共管理机构</view>
 		</view>
 	</view>
@@ -210,6 +211,23 @@ export default {
 			this.val = this.randomWord(false, 32);
 			this.creatQrcode();
 		},
+		back() {
+			uni.switchTab({
+				url: '/pages/home/home'
+			});
+		},
+		// 返回
+		goSetting() {
+			uni.navigateTo({
+				url: '/pages/qrCode/qrCodeSetting'
+			});
+		},
+		//回到首页
+		goHome() {
+			uni.switchTab({
+				url: '/pages/home/home'
+			});
+		},
 		// ↓ 二维码事件
 		sliderchange(e) {
 			this.size = e.detail.value;
@@ -328,7 +346,7 @@ export default {
 			.dateTime {
 				font-size: 30px;
 				font-weight: 800;
-				line-height: 34px;
+				line-height: 36px;
 			}
 			.refresh {
 				color: #838489;
@@ -345,7 +363,17 @@ export default {
 				font-weight: 600;
 			}
 		}
-		.bottom{
+		.serchInfo {
+			width: 150px;
+			margin: 0 auto;
+			margin-top: 15px;
+			text-align: center;
+			font-size: 16px;
+			background-color: #ffffff;
+			padding: 6px 0px;
+			border-radius: 2px;
+		}
+		.bottom {
 			width: 100%;
 			position: fixed;
 			bottom: 30px;
@@ -366,7 +394,7 @@ export default {
 				left: 20px;
 			}
 		}
-	
+
 	}
 }
 </style>

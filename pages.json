@@ -23,7 +23,15 @@
 	    ,{
             "path" : "pages/qrCode/qrCode",
             "style" : {}
-        }
+        },
+		{
+			"path": "pages/qrCode/qrCodeSetting",
+			"style": {
+				"navigationStyle": "default",
+				"navigationBarTitleText": "健康码设置",
+				"navigationBarTextStyle":"white"
+			}
+		}
     ],
 	"tabBar": {
 		"color": "#333333",
